@@ -32,6 +32,9 @@ jobs:
           go-version-file: go/go.mod
           cache-dependency-path: go/go.sum
 
+      - name: Build Go Library
+        run: bundle exec rake go:build
+
       - name: Compile Native Extension
         run: bundle exec rake compile
 

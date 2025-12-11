@@ -98,8 +98,6 @@ begin
     ext.cross_platform = PLATFORMS
   end
 
-  task compile: "go:build"
-
   namespace "gem" do
     task "prepare" do
       require "rake_compiler_dock"
