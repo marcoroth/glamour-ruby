@@ -38,7 +38,7 @@ begin
 
   def go_version
     go_mod = File.read("go/go.mod")
-    go_mod[/^go (\d+\.\d+)/, 1]
+    go_mod[/^go (\d+\.\d+\.\d+)/, 1] || go_mod[/^go (\d+\.\d+)/, 1]
   end
 
   def detect_go_platform
