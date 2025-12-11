@@ -14,13 +14,15 @@ jobs:
     strategy:
       matrix:
         ruby:
-          - '3.4.7'
+          - '3.2'
+          - '3.3'
+          - '3.4'
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Set up Ruby
+      - name: Set up Ruby ${{ matrix.ruby }}
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.ruby }}
