@@ -2,10 +2,15 @@
 
 require "bundler/gem_tasks"
 require "minitest/test_task"
-require "rubocop/rake_task"
 
 Minitest::TestTask.create
-RuboCop::RakeTask.new
+
+begin
+  require "rubocop/rake_task"
+  RuboCop::RakeTask.new
+rescue LoadError
+  # rubocop not available in cross-compilation environment
+end
 
 begin
   require "rake/extensiontask"
@@ -25,15 +30,15 @@ begin
 
   GO_PLATFORMS = {
     "aarch64-linux-gnu" => { goos: "linux", goarch: "arm64", cc: "aarch64-linux-gnu-gcc" },
-    "aarch64-linux-musl" => { goos: "linux", goarch: "arm64", cc: "aarch64-linux-musl-gcc" },
+    "aarch64-linux-musl" => { goos: "linux", goarch: "arm64", cc: "aarch64-alpine-linux-musl-gcc" },
     "arm-linux-gnu" => { goos: "linux", goarch: "arm", cc: "arm-linux-gnueabihf-gcc" },
-    "arm-linux-musl" => { goos: "linux", goarch: "arm", cc: "arm-linux-musleabihf-gcc" },
+    "arm-linux-musl" => { goos: "linux", goarch: "arm", cc: "arm-alpine-linux-musleabihf-gcc" },
     "arm64-darwin" => { goos: "darwin", goarch: "arm64", cc: "o64-clang" },
     "x86-linux-gnu" => { goos: "linux", goarch: "386", cc: "i686-linux-gnu-gcc" },
-    "x86-linux-musl" => { goos: "linux", goarch: "386", cc: "i686-linux-musl-gcc" },
+    "x86-linux-musl" => { goos: "linux", goarch: "386", cc: "i586-alpine-linux-musl-gcc" },
     "x86_64-darwin" => { goos: "darwin", goarch: "amd64", cc: "o64-clang" },
     "x86_64-linux-gnu" => { goos: "linux", goarch: "amd64", cc: "x86_64-linux-gnu-gcc" },
-    "x86_64-linux-musl" => { goos: "linux", goarch: "amd64", cc: "x86_64-linux-musl-gcc" }
+    "x86_64-linux-musl" => { goos: "linux", goarch: "amd64", cc: "x86_64-alpine-linux-musl-gcc" }
   }.freeze
 
   def go_version
