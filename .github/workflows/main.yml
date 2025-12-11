@@ -31,6 +31,9 @@ jobs:
         with:
           go-version-file: go/go.mod
 
+      - name: Compile Native Extension
+        run: bundle exec rake compile
+
       - name: Run tests
         run: bundle exec mtest
 
