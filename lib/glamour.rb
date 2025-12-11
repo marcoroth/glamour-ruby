@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # rbs_inline: enabled
 
 require "json"
@@ -24,7 +25,7 @@ module Glamour
     end
 
     # @rbs markdown: String -- the markdown content to render
-    # @rbs style: Hash[Symbol, untyped] | String | singleton(Glamour::Style) -- style definition as Hash, JSON string, or Style class
+    # @rbs style: Hash[Symbol, untyped] | String | singleton(Glamour::Style) -- style definition
     # @rbs width: Integer -- optional word wrap width
     # @rbs return: String -- rendered output with ANSI escape codes
     def render_with_style(markdown, style, width: 0)
