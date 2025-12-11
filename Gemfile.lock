@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    glamour (0.0.1)
+    glamour (0.1.0)
 
 GEM
   remote: https://rubygems.org/
