@@ -10,9 +10,6 @@ gem "minitest", "~> 5.16"
 gem "rake", "~> 13.0"
 gem "rake-compiler", "~> 1.2"
 gem "rake-compiler-dock", "~> 1.5"
+gem "rbs-inline", "~> 0.12"
 gem "rubocop", "~> 1.21"
-
-group :development do
-  gem "rbs-inline", "~> 0.12"
-  gem "steep", "~> 1.10"
-end
+gem "steep", "~> 1.10"
