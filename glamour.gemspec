@@ -8,7 +8,7 @@ Gem::Specification.new do |spec|
   spec.authors = ["Marco Roth"]
   spec.email = ["marco.roth@intergga.ch"]
 
-  spec.summary = "Ruby wrapper for Charm's glamour stylesheet-based markdown rendering."
+  spec.summary = "Ruby wrapper for Charm's glamour stylesheet-based markdown rendering for Ruby CLI apps."
   spec.description = spec.summary
   spec.homepage = "https://github.com/marcoroth/glamour-ruby"
   spec.license = "MIT"
