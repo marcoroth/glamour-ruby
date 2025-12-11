@@ -24,16 +24,16 @@ begin
   ].freeze
 
   GO_PLATFORMS = {
-    "aarch64-linux-gnu" => { goos: "linux", goarch: "arm64" },
-    "aarch64-linux-musl" => { goos: "linux", goarch: "arm64" },
-    "arm-linux-gnu" => { goos: "linux", goarch: "arm" },
-    "arm-linux-musl" => { goos: "linux", goarch: "arm" },
-    "arm64-darwin" => { goos: "darwin", goarch: "arm64" },
-    "x86-linux-gnu" => { goos: "linux", goarch: "386" },
-    "x86-linux-musl" => { goos: "linux", goarch: "386" },
-    "x86_64-darwin" => { goos: "darwin", goarch: "amd64" },
-    "x86_64-linux-gnu" => { goos: "linux", goarch: "amd64" },
-    "x86_64-linux-musl" => { goos: "linux", goarch: "amd64" }
+    "aarch64-linux-gnu" => { goos: "linux", goarch: "arm64", cc: "aarch64-linux-gnu-gcc" },
+    "aarch64-linux-musl" => { goos: "linux", goarch: "arm64", cc: "aarch64-linux-musl-gcc" },
+    "arm-linux-gnu" => { goos: "linux", goarch: "arm", cc: "arm-linux-gnueabihf-gcc" },
+    "arm-linux-musl" => { goos: "linux", goarch: "arm", cc: "arm-linux-musleabihf-gcc" },
+    "arm64-darwin" => { goos: "darwin", goarch: "arm64", cc: "o64-clang" },
+    "x86-linux-gnu" => { goos: "linux", goarch: "386", cc: "i686-linux-gnu-gcc" },
+    "x86-linux-musl" => { goos: "linux", goarch: "386", cc: "i686-linux-musl-gcc" },
+    "x86_64-darwin" => { goos: "darwin", goarch: "amd64", cc: "o64-clang" },
+    "x86_64-linux-gnu" => { goos: "linux", goarch: "amd64", cc: "x86_64-linux-gnu-gcc" },
+    "x86_64-linux-musl" => { goos: "linux", goarch: "amd64", cc: "x86_64-linux-musl-gcc" }
   }.freeze
 
   def go_version
@@ -126,7 +126,7 @@ begin
           export PATH=$PATH:/usr/local/go/bin && \
           cd go && \
           mkdir -p build/#{env[:goos]}_#{env[:goarch]} && \
-          CGO_ENABLED=1 GOOS=#{env[:goos]} GOARCH=#{env[:goarch]} go build -buildmode=c-archive -o build/#{env[:goos]}_#{env[:goarch]}/libglamour.a . && \
+          CGO_ENABLED=1 CC=#{env[:cc]} GOOS=#{env[:goos]} GOARCH=#{env[:goarch]} go build -buildmode=c-archive -o build/#{env[:goos]}_#{env[:goarch]}/libglamour.a . && \
           cd .. && \
           bundle --local && \
           rake native:#{platform} gem RUBY_CC_VERSION='#{ENV.fetch("RUBY_CC_VERSION", nil)}'
