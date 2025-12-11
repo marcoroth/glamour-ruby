@@ -9,14 +9,17 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
+permissions:
+  contents: read
+
 jobs:
   build:
-    name: Build ${{ matrix.platform }} gem
+    name: Build ${{ matrix.target }} gem
     strategy:
       fail-fast: false
       matrix:
-        platform:
-          - ruby
+        target:
+          - default
           - aarch64-linux-gnu
           - aarch64-linux-musl
           - arm-linux-gnu
@@ -29,30 +32,29 @@ jobs:
           - x86_64-linux-musl
 
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 20
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Set up Ruby
+      - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: "3.4"
           bundler-cache: true
 
       - name: Build gem
         run: |
-          if [ "${{ matrix.platform }}" = "ruby" ]; then
+          if [ "${{ matrix.target }}" = "default" ]; then
             bundle exec rake build
           else
-            bundle exec rake gem:${{ matrix.platform }}
+            bundle exec rake gem:${{ matrix.target }}
           fi
 
       - name: Upload gem artifacts
+        if: github.event_name == 'release'
         uses: actions/upload-artifact@v4
         with:
-          name: gem-${{ matrix.platform }}
+          name: gem-${{ matrix.target }}
           path: pkg/*.gem
           if-no-files-found: error
           retention-days: 7
@@ -68,8 +70,7 @@ jobs:
       id-token: write
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
@@ -80,7 +81,7 @@ jobs:
           ref: 1c162a739e8b4cb21a676e97b087e8268d8fc40b # v1.1.2
           path: .github/_release-gem
 
-      - name: Set up Ruby
+      - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: "3.4"
@@ -96,7 +97,7 @@ jobs:
       - name: Configure trusted publishing credentials
         uses: rubygems/configure-rubygems-credentials@v1.0.0
 
-      - name: Push gems with Sigstore attestation
+      - name: Push gem with Sigstore attestation
         env:
           RUBYOPT: "-r${{ github.workspace }}/.github/_release-gem/rubygems-attestation-patch.rb"
         run: |
