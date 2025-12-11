@@ -120,7 +120,9 @@ begin
         env = GO_PLATFORMS[platform]
 
         build_script = <<~BASH
-          curl -sSL https://go.dev/dl/go#{go_version}.linux-amd64.tar.gz | tar -C /usr/local -xzf - && \
+          curl -sSL https://go.dev/dl/go#{go_version}.linux-amd64.tar.gz -o /tmp/go.tar.gz && \
+          sudo tar -C /usr/local -xzf /tmp/go.tar.gz && \
+          rm /tmp/go.tar.gz && \
           export PATH=$PATH:/usr/local/go/bin && \
           cd go && \
           mkdir -p build/#{env[:goos]}_#{env[:goarch]} && \
