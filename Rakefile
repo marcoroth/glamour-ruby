@@ -129,6 +129,7 @@ begin
           CGO_ENABLED=1 CC=#{env[:cc]} GOOS=#{env[:goos]} GOARCH=#{env[:goarch]} go build -buildmode=c-archive -o build/#{env[:goos]}_#{env[:goarch]}/libglamour.a . && \
           cd .. && \
           rm -f .ruby-version && \
+          rm -rf vendor/bundle && \
           bundle install && \
           rake native:#{platform} gem RUBY_CC_VERSION='#{ENV.fetch("RUBY_CC_VERSION", nil)}'
         BASH
