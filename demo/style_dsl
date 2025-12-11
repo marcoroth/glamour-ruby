@@ -1,0 +1,86 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+$LOAD_PATH.unshift(File.expand_path("../lib", __dir__))
+require "glamour"
+
+puts "=== Style DSL Demo ==="
+puts
+
+class MyStyle < Glamour::Style
+  style :heading do
+    bold true
+    color "212"
+  end
+
+  style :h1 do
+    prefix ">> "
+    color "99"
+    bold true
+  end
+
+  style :strong do
+    bold true
+    color "196"
+  end
+
+  style :emph do
+    italic true
+    color "226"
+  end
+
+  style :code do
+    color "203"
+    background_color "236"
+  end
+
+  style :document do
+    margin 2
+  end
+end
+
+markdown = <<~MD
+  # Welcome to the Style DSL
+
+  This is a **custom styled** document with *italic* text.
+
+  Some `inline code` as well.
+
+  ## Features
+
+  - Define styles using Ruby blocks
+  - Clean DSL syntax
+  - Reusable style classes
+MD
+
+puts "--- Style class definition ---"
+puts "MyStyle.to_h:"
+puts MyStyle.to_h.inspect
+puts
+
+puts "--- Rendering with MyStyle.render ---"
+puts MyStyle.render(markdown)
+puts
+
+puts "--- Rendering with Glamour.render(style: MyStyle) ---"
+puts Glamour.render("# Hello **World**", style: MyStyle)
+puts
+
+puts "--- Using Renderer with Style class ---"
+renderer = Glamour::Renderer.new(style: MyStyle, width: 50)
+puts renderer.render("# Custom Renderer\n\nWith **style class** support!")
+puts
+
+puts "--- Anonymous Style class ---"
+custom = Class.new(Glamour::Style) do
+  style :heading do
+    bold true
+    color "39"
+  end
+
+  style :text do
+    color "252"
+  end
+end
+
+puts custom.render("# Anonymous Style\n\nClean and simple.")

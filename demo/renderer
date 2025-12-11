@@ -1,0 +1,42 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+$LOAD_PATH.unshift(File.expand_path("../lib", __dir__))
+require "glamour"
+
+puts "=== Custom Renderer Demo ==="
+puts
+
+renderer = Glamour::Renderer.new(
+  style: "dark",
+  width: 60,
+  emoji: true,
+  preserve_newlines: false
+)
+
+puts "Renderer configuration:"
+puts "  style: #{renderer.style}"
+puts "  width: #{renderer.width}"
+puts "  emoji: #{renderer.emoji}"
+puts "  preserve_newlines: #{renderer.preserve_newlines}"
+puts "  color_profile: #{renderer.color_profile}"
+puts
+
+markdown = <<~MD
+  # Welcome :wave:
+
+  This is a **custom renderer** example with:
+
+  - :rocket: Emoji support
+  - :art: Dark theme styling
+  - :straight_ruler: 60 character width
+
+  ## Code Example
+
+  ```ruby
+  renderer = Glamour::Renderer.new(style: "dark", emoji: true)
+  puts renderer.render("# Hello :wave:")
+  ```
+MD
+
+puts renderer.render(markdown)

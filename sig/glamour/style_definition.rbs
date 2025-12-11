@@ -1,0 +1,24 @@
+# Generated from lib/glamour/style_definition.rb with RBS::Inline
+
+module Glamour
+  class StyleDefinition
+    # @rbs @attributes: Hash[Symbol, untyped]
+    # @rbs return: void
+    def initialize: () ?{ (?) -> untyped } -> void
+
+    # @rbs return: Hash[Symbol, untyped]
+    def to_h: () -> Hash[Symbol, untyped]
+
+    private
+
+    # @rbs name: Symbol -- the attribute name
+    # @rbs value: untyped -- the attribute value
+    # @rbs return: untyped
+    def method_missing: (Symbol name, ?untyped value) ?{ (?) -> untyped } -> untyped
+
+    # @rbs _name: Symbol
+    # @rbs _include_private: bool
+    # @rbs return: true
+    def respond_to_missing?: (untyped _name, ?untyped _include_private) -> true
+  end
+end

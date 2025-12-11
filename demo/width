@@ -1,0 +1,22 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+$LOAD_PATH.unshift(File.expand_path("../lib", __dir__))
+require "glamour"
+
+puts "=== Word Wrap Width Demo ==="
+puts
+
+markdown = <<~MD
+  # Long Text Example
+
+  This is a very long paragraph that demonstrates how glamour can wrap text at different widths. The word wrap feature is useful when you want to control the output width for different terminal sizes or display contexts.
+MD
+
+widths = [40, 60, 80]
+
+widths.each do |width|
+  puts "--- Width: #{width} characters ---"
+  puts Glamour.render(markdown, style: "dark", width: width)
+  puts
+end

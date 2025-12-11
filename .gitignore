@@ -1,0 +1,22 @@
+/.bundle/
+/.yardoc
+/_yardoc/
+/coverage/
+/doc/
+/pkg/
+/spec/reports/
+/tmp/
+
+# Go build artifacts
+*.a
+*.h
+go/build/
+
+# Native extension build artifacts
+*.bundle
+*.so
+*.dll
+*.o
+lib/glamour/glamour.bundle
+lib/glamour/glamour.so
+lib/glamour/glamour.dll

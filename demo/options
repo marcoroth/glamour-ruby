@@ -1,0 +1,35 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+$LOAD_PATH.unshift(File.expand_path("../lib", __dir__))
+require "glamour"
+
+puts "=== Render Options Demo ==="
+puts
+
+markdown = <<~MD
+  # Hello :wave:
+
+  Check out [this link](https://example.com/page).
+
+  This is **bold** and *italic*.
+MD
+
+puts "--- Default ---"
+puts Glamour.render(markdown)
+puts
+
+puts "--- With emoji enabled ---"
+puts Glamour.render(markdown, emoji: true)
+puts
+
+puts "--- With base_url for relative links ---"
+puts Glamour.render("[Click here](/docs)", base_url: "https://example.com")
+puts
+
+puts "--- With color_profile: :ascii (no colors) ---"
+puts Glamour.render("# Hello **World**", color_profile: :ascii)
+puts
+
+puts "--- With color_profile: :ansi256 ---"
+puts Glamour.render("# Hello **World**", color_profile: :ansi256, style: "dark")

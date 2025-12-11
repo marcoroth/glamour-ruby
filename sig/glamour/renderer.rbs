@@ -1,0 +1,22 @@
+# Generated from lib/glamour/renderer.rb with RBS::Inline
+
+module Glamour
+  class Renderer
+    # @rbs hash: Hash[Symbol, untyped] -- style definition hash
+    # @rbs return: String
+    def style_hash=: (Hash[Symbol, untyped] hash) -> String
+
+    alias original_initialize initialize
+
+    # @rbs style: String | singleton(Glamour::Style) -- style name or Style subclass
+    # @rbs width: Integer -- optional word wrap width
+    # @rbs emoji: bool -- whether to render emoji
+    # @rbs preserve_newlines: bool -- whether to preserve newlines
+    # @rbs base_url: String? -- base URL for relative links
+    # @rbs color_profile: Symbol -- color profile to use
+    # @rbs json_style: String? -- JSON style definition
+    # @rbs style_hash: Hash[Symbol, untyped]? -- style definition hash
+    # @rbs return: void
+    def initialize: (?style: String | singleton(Glamour::Style), ?width: Integer, ?emoji: bool, ?preserve_newlines: bool, ?base_url: String?, ?color_profile: Symbol, ?json_style: String?, ?style_hash: Hash[Symbol, untyped]?) -> void
+  end
+end

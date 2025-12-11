@@ -1,0 +1,10 @@
+# Signatures for the C extension (ext/glamour/extension.c)
+
+module Glamour
+  def self.render_with_json: (String markdown, String json_style, ?width: Integer) -> String
+  def self.upstream_version: () -> String
+
+  class Renderer
+    def render: (String markdown) -> String
+  end
+end

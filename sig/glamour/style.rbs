@@ -1,0 +1,28 @@
+# Generated from lib/glamour/style.rb with RBS::Inline
+
+module Glamour
+  class Style
+    @styles: Hash[Symbol, Hash[Symbol, untyped]]
+
+    # @rbs element: Symbol | String -- the element to style
+    # @rbs return: Hash[Symbol, untyped] -- the style definition
+    def self.style: (Symbol | String element) ?{ (?) -> untyped } -> Hash[Symbol, untyped]
+
+    # @rbs return: Hash[Symbol, Hash[Symbol, untyped]]
+    def self.styles: () -> Hash[Symbol, Hash[Symbol, untyped]]
+
+    # @rbs return: Hash[String, Hash[Symbol, untyped]]
+    def self.to_h: () -> Hash[String, Hash[Symbol, untyped]]
+
+    # @rbs return: String
+    def self.to_json: (*untyped _args) -> String
+
+    # @rbs markdown: String -- the markdown content to render
+    # @rbs width: Integer -- optional word wrap width
+    # @rbs return: String -- rendered output with ANSI escape codes
+    def self.render: (String markdown, ?width: Integer, **untyped) -> String
+
+    # @rbs return: true
+    def self.glamour_style?: () -> true
+  end
+end

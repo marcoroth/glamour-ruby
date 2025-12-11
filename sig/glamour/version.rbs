@@ -1,0 +1,6 @@
+# Generated from lib/glamour/version.rb with RBS::Inline
+
+module Glamour
+  # @rbs const VERSION: String
+  VERSION: ::String
+end

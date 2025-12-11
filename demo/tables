@@ -1,0 +1,31 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+$LOAD_PATH.unshift(File.expand_path("../lib", __dir__))
+require "glamour"
+
+puts "=== Tables Demo ==="
+puts
+
+markdown = <<~MD
+  # Markdown Tables
+
+  ## Simple Table
+
+  | Name | Language | Stars |
+  |------|----------|-------|
+  | glamour | Go | 2.5k |
+  | lipgloss | Go | 8.5k |
+  | bubbletea | Go | 28k |
+  | gum | Go | 18k |
+
+  ## Aligned Columns
+
+  | Left | Center | Right |
+  |:-----|:------:|------:|
+  | L1 | C1 | R1 |
+  | L2 | C2 | R2 |
+  | L3 | C3 | R3 |
+MD
+
+puts Glamour.render(markdown, style: "dark")

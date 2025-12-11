@@ -1,0 +1,75 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+$LOAD_PATH.unshift(File.expand_path("../lib", __dir__))
+require "glamour"
+
+puts "=== Custom Style Demo ==="
+puts
+
+markdown = <<~MD
+  # Custom Styled Heading
+
+  This is a paragraph with **bold** and *italic* text.
+
+  Some `inline code` as well.
+MD
+
+# See: https://github.com/charmbracelet/glamour/tree/master/styles
+custom_style = {
+  document: {
+    block_prefix: "",
+    block_suffix: "",
+    margin: 2
+  },
+  heading: {
+    block_suffix: "",
+    color: "39",
+    bold: true
+  },
+  h1: {
+    prefix: "# ",
+    color: "212",
+    bold: true
+  },
+  h2: {
+    prefix: "## ",
+    color: "212"
+  },
+  paragraph: {
+    block_prefix: "",
+    block_suffix: ""
+  },
+  text: {
+    color: "252"
+  },
+  emph: {
+    italic: true,
+    color: "226"
+  },
+  strong: {
+    bold: true,
+    color: "196"
+  },
+  code: {
+    color: "203",
+    background_color: "236"
+  }
+}
+
+puts "--- Using Ruby Hash style ---"
+puts Glamour.render_with_style(markdown, custom_style)
+puts
+
+puts "--- Using Ruby Hash style with width ---"
+puts Glamour.render_with_style(markdown, custom_style, width: 40)
+puts
+
+puts "--- Using Renderer with style_hash ---"
+renderer = Glamour::Renderer.new(style_hash: custom_style, width: 50)
+puts renderer.render(markdown)
+puts
+
+puts "--- Using JSON string ---"
+json_style = '{"heading": {"bold": true, "color": "99"}, "strong": {"color": "196", "bold": true}}'
+puts Glamour.render_with_style("# Hello **World**", json_style)

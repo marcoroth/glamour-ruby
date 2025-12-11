@@ -1,0 +1,22 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+$LOAD_PATH.unshift(File.expand_path("../lib", __dir__))
+require "glamour"
+
+puts "=== Glamour Styles Demo ==="
+puts
+
+markdown = <<~MD
+  # Styled Heading
+
+  This is a paragraph with **bold** and *italic* text.
+MD
+
+styles = %w[auto dark light notty dracula]
+
+styles.each do |style|
+  puts "--- Style: #{style} ---"
+  puts Glamour.render(markdown, style: style)
+  puts
+end

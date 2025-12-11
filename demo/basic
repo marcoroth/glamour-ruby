@@ -1,0 +1,28 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+$LOAD_PATH.unshift(File.expand_path("../lib", __dir__))
+require "glamour"
+
+puts "=== Basic Markdown Rendering ==="
+puts
+
+markdown = <<~MD
+  # Hello World
+
+  This is **bold** and this is *italic*.
+
+  ## Features
+
+  - Bullet point 1
+  - Bullet point 2
+  - Bullet point 3
+
+  > This is a blockquote
+
+  ```ruby
+  puts "Hello from Ruby!"
+  ```
+MD
+
+puts Glamour.render(markdown)

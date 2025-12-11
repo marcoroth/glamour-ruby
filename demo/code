@@ -1,0 +1,53 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+$LOAD_PATH.unshift(File.expand_path("../lib", __dir__))
+require "glamour"
+
+puts "=== Code Syntax Highlighting Demo ==="
+puts
+
+markdown = <<~MD
+  # Code Examples
+
+  ## Ruby
+
+  ```ruby
+  class Greeter
+    def initialize(name)
+      @name = name
+    end
+
+    def greet
+      puts "Hello, \#{@name}!"
+    end
+  end
+
+  greeter = Greeter.new("World")
+  greeter.greet
+  ```
+
+  ## JavaScript
+
+  ```javascript
+  const greet = (name) => {
+    console.log(`Hello, ${name}!`);
+  };
+
+  greet("World");
+  ```
+
+  ## Go
+
+  ```go
+  package main
+
+  import "fmt"
+
+  func main() {
+      fmt.Println("Hello, World!")
+  }
+  ```
+MD
+
+puts Glamour.render(markdown, style: "dark")
