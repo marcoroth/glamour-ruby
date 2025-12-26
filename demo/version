@@ -1,12 +1,7 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 
-$LOAD_PATH.unshift(File.expand_path("../lib", __dir__))
+require "bundler/setup"
 require "glamour"
 
-puts "=== Glamour Version Info ==="
-puts
 puts Glamour.version
-puts
-puts "Gem version: #{Glamour::VERSION}"
-puts "Upstream version: #{Glamour::Upstream::VERSION}"
