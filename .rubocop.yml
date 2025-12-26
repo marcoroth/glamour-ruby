@@ -41,3 +41,6 @@ Security/Eval:
 
 Style/ArgumentsForwarding:
   Enabled: false
+
+Layout/LeadingCommentSpace:
+  AllowRBSInlineAnnotation: true
