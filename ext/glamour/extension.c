@@ -171,7 +171,7 @@ static VALUE glamour_upstream_version_rb(VALUE self) {
 static VALUE glamour_version_rb(VALUE self) {
   VALUE gem_version = rb_const_get(self, rb_intern("VERSION"));
   VALUE upstream_version = glamour_upstream_version_rb(self);
-  VALUE format_string = rb_utf8_str_new_cstr("glamour v%s (upstream v%s) [Go native extension]");
+  VALUE format_string = rb_utf8_str_new_cstr("glamour v%s (upstream %s) [Go native extension]");
 
   return rb_funcall(rb_mKernel, rb_intern("sprintf"), 3, format_string, gem_version, upstream_version);
 }

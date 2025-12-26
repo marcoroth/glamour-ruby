@@ -33,8 +33,8 @@ module Glamour
       # @rbs markdown: String -- the markdown content to render
       # @rbs width: Integer -- optional word wrap width
       # @rbs return: String -- rendered output with ANSI escape codes
-      def render(markdown, width: 0, **)
-        Glamour.render(markdown, style: self, width: width, **)
+      def render(markdown, width: 0, **options)
+        Glamour.render(markdown, style: self, width: width, **options)
       end
 
       # @rbs return: true

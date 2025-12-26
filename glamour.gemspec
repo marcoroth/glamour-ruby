@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.authors = ["Marco Roth"]
   spec.email = ["marco.roth@intergga.ch"]
 
-  spec.summary = "Ruby wrapper for Charm's glamour stylesheet-based markdown rendering for Ruby CLI apps."
-  spec.description = spec.summary
+  spec.summary = "Ruby wrapper for Charm's glamour. Stylesheet-based markdown rendering for your CLI apps."
+  spec.description = "Glamour lets you render markdown documents & templates on ANSI compatible terminals."
   spec.homepage = "https://github.com/marcoroth/glamour-ruby"
   spec.license = "MIT"
   spec.required_ruby_version = ">= 3.2.0"

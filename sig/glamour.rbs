@@ -3,18 +3,14 @@
 module Glamour
   alias self.render_native self.render
 
-  # Render markdown with optional style class support.
-  #
   # @rbs markdown: String -- the markdown content to render
   # @rbs style: String | singleton(Glamour::Style) -- style name or Style subclass
   # @rbs width: Integer -- optional word wrap width
   # @rbs return: String -- rendered output with ANSI escape codes
-  def self.render: (String markdown, ?style: String | singleton(Glamour::Style), ?width: Integer, **untyped) -> String
+  def self.render: (String markdown, ?style: String | singleton(Glamour::Style), ?width: Integer, **untyped options) -> String
 
-  # Render markdown with a custom style definition.
-  #
   # @rbs markdown: String -- the markdown content to render
-  # @rbs style: Hash[Symbol, untyped] | String | singleton(Glamour::Style) -- style definition as Hash, JSON string, or Style class
+  # @rbs style: Hash[Symbol, untyped] | String | singleton(Glamour::Style) -- style definition
   # @rbs width: Integer -- optional word wrap width
   # @rbs return: String -- rendered output with ANSI escape codes
   def self.render_with_style: (String markdown, Hash[Symbol, untyped] | String | singleton(Glamour::Style) style, ?width: Integer) -> String

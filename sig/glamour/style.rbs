@@ -20,7 +20,7 @@ module Glamour
     # @rbs markdown: String -- the markdown content to render
     # @rbs width: Integer -- optional word wrap width
     # @rbs return: String -- rendered output with ANSI escape codes
-    def self.render: (String markdown, ?width: Integer, **untyped) -> String
+    def self.render: (String markdown, ?width: Integer, **untyped options) -> String
 
     # @rbs return: true
     def self.glamour_style?: () -> true

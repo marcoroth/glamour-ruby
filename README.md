@@ -1,13 +1,13 @@
 <div align="center">
-  <h1>Glamour</h1>
-  <h4>Stylesheet-based Markdown Rendering for Ruby CLI Apps</h4>
+  <h1>Glamour for Ruby</h1>
+  <h4>Stylesheet-based markdown rendering for your CLI apps.</h4>
 
   <p>
     <a href="https://rubygems.org/gems/glamour"><img alt="Gem Version" src="https://img.shields.io/gem/v/glamour"></a>
     <a href="https://github.com/marcoroth/glamour-ruby/blob/main/LICENSE.txt"><img alt="License" src="https://img.shields.io/github/license/marcoroth/glamour-ruby"></a>
   </p>
 
-  <p>Ruby bindings for <a href="https://github.com/charmbracelet/glamour">charmbracelet/glamour</a>.<br/>Render markdown documents with beautiful styling on ANSI-compatible terminals.</p>
+  <p>Ruby bindings for <a href="https://github.com/charmbracelet/glamour">charmbracelet/glamour</a>.<br/>Render markdown documents & templates on ANSI compatible terminals.</p>
 </div>
 
 ## Installation

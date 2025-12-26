@@ -16,11 +16,11 @@ module Glamour
     # @rbs style: String | singleton(Glamour::Style) -- style name or Style subclass
     # @rbs width: Integer -- optional word wrap width
     # @rbs return: String -- rendered output with ANSI escape codes
-    def render(markdown, style: "auto", width: 0, **)
+    def render(markdown, style: "auto", width: 0, **options)
       if style_class?(style)
-        render_with_style_class(markdown, style, width: width, **)
+        render_with_style_class(markdown, style, width: width, **options)
       else
-        render_native(markdown, style: style, width: width, **)
+        render_native(markdown, style: style, width: width, **options)
       end
     end
 
