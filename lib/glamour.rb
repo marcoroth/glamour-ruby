@@ -3,8 +3,16 @@
 # rbs_inline: enabled
 
 require "json"
+
 require_relative "glamour/version"
-require_relative "glamour/glamour"
+
+begin
+  major, minor, _patch = RUBY_VERSION.split(".") #: [String, String, String]
+  require_relative "glamour/#{major}.#{minor}/glamour"
+rescue LoadError
+  require_relative "glamour/glamour"
+end
+
 require_relative "glamour/renderer"
 require_relative "glamour/style"
 
