@@ -3,6 +3,5 @@
 # rbs_inline: enabled
 
 module Glamour
-  # @rbs const VERSION: String
-  VERSION = "0.1.0"
+  VERSION = "0.2.0" #: String
 end
