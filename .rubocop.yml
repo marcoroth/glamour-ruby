@@ -38,3 +38,6 @@ Layout/LineLength:
 Security/Eval:
   Exclude:
     - Rakefile
+
+Style/ArgumentsForwarding:
+  Enabled: false
