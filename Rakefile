@@ -70,7 +70,9 @@ begin
       platform = detect_go_platform
       output_dir = "go/build/#{platform}"
       FileUtils.mkdir_p(output_dir)
-      sh "cd go && CGO_ENABLED=1 go build -buildmode=c-archive -o build/#{platform}/libglamour.a ."
+      Dir.chdir("./go") do
+        sh "CGO_ENABLED=1 go build -buildmode=c-archive -o build/#{platform}/libglamour.a ."
+      end
     end
 
     desc "Build Go archives for all platforms"
@@ -78,7 +80,9 @@ begin
       GO_PLATFORMS.each_value do |env|
         output_dir = "go/build/#{env[:goos]}_#{env[:goarch]}"
         FileUtils.mkdir_p(output_dir)
-        sh "cd go && CGO_ENABLED=1 GOOS=#{env[:goos]} GOARCH=#{env[:goarch]} go build -buildmode=c-archive -o build/#{env[:goos]}_#{env[:goarch]}/libglamour.a ."
+        Dir.chdir("./go") do
+          sh "CGO_ENABLED=1 GOOS=#{env[:goos]} GOARCH=#{env[:goarch]} go build -buildmode=c-archive -o build/#{env[:goos]}_#{env[:goarch]}/libglamour.a ."
+        end
       end
     end
 
