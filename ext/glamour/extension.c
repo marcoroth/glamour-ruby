@@ -178,8 +178,18 @@ static VALUE glamour_version_rb(VALUE self) {
 
 /* Renderer class methods */
 
+static const rb_data_type_t renderer_data_type = {
+  .wrap_struct_name = "Glamour::Renderer",
+  .function = {
+    .dmark = NULL,
+    .dfree = NULL,
+    .dsize = NULL,
+  },
+  .flags = RUBY_TYPED_FREE_IMMEDIATELY,
+};
+
 static VALUE renderer_alloc(VALUE klass) {
-  return Data_Wrap_Struct(klass, NULL, NULL, NULL);
+  return TypedData_Wrap_Struct(klass, &renderer_data_type, NULL);
 }
 
 static VALUE renderer_initialize(int argc, VALUE *argv, VALUE self) {
