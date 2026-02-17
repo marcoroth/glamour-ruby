@@ -42,16 +42,20 @@ unless File.exist?(File.join(go_lib_dir, "libglamour.a"))
   ERROR
 end
 
+go_lib_path = File.join(go_lib_dir, "libglamour.a")
+
 $LDFLAGS << " -L#{go_lib_dir}"
 $INCFLAGS << " -I#{go_lib_dir}"
 
-$LOCAL_LIBS << " #{go_lib_dir}/libglamour.a"
-
 case RbConfig::CONFIG["host_os"]
 when /darwin/
+  $LDFLAGS << " -Wl,-load_hidden,#{go_lib_path}"
+  $LDFLAGS << " -Wl,-exported_symbol,_Init_glamour"
   $LDFLAGS << " -framework CoreFoundation -framework Security -framework SystemConfiguration"
   $LDFLAGS << " -lresolv"
 when /linux/
+  $LOCAL_LIBS << " #{go_lib_path}"
+  $LDFLAGS << " -Wl,--exclude-libs,ALL"
   $LDFLAGS << " -lpthread -lm -ldl"
   $LDFLAGS << " -lresolv" if find_library("resolv", "res_query")
 end
