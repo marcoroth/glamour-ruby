@@ -117,6 +117,21 @@ module Glamour
       assert_kind_of String, result
     end
 
+    it "renders with word wrap by default" do
+      long_text = "This is a very very long paragraph" * 10
+      klass = Class.new(Glamour::Style)
+      result = klass.render(long_text, width: 40)
+      assert_operator result.strip.lines.reject(&:empty?).length, :>, 1
+    end
+
+    it "renders without word wrap with width: 0" do
+      long_text = "This is a very very long paragraph" * 10
+      klass = Class.new(Glamour::Style)
+      result = klass.render(long_text, width: 0)
+      lines = result.strip.lines.map(&:rstrip).reject(&:empty?)
+      assert_equal 1, lines.length
+    end
+
     it "handles empty style class" do
       klass = Class.new(Glamour::Style)
 

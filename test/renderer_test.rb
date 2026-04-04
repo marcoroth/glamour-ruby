@@ -8,7 +8,7 @@ module Glamour
       renderer = Glamour::Renderer.new
       refute_nil renderer
       assert_equal "auto", renderer.style
-      assert_equal 0, renderer.width
+      assert_nil renderer.width
       assert_equal false, renderer.emoji
     end
 
@@ -31,6 +31,22 @@ module Glamour
       refute_nil result
       assert_kind_of String, result
       assert_includes result, "Hello"
+    end
+
+    it "renders markdown with word wrap by default" do
+      long_text = "This is a very very long paragraph" * 10
+      renderer = Glamour::Renderer.new(style: "notty")
+      result = renderer.render(long_text)
+      lines = result.strip.lines.map(&:strip).reject(&:empty?)
+      assert_operator lines.length, :>, 1
+    end
+
+    it "renders markdown with word wrap disabled with width: 0" do
+      long_text = "This is a very very long paragraph" * 10
+      renderer = Glamour::Renderer.new(style: "notty", width: 0)
+      result = renderer.render(long_text)
+      lines = result.strip.lines.map(&:strip).reject(&:empty?)
+      assert_equal 1, lines.length, "Expected no word wrap with width: 0, but got multiple lines: #{lines.inspect}"
     end
 
     it "renders with json_style option" do

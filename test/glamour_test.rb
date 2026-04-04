@@ -59,6 +59,20 @@ module Glamour
       assert_kind_of String, result
     end
 
+    it "renders with word wrap by default" do
+      long_text = "This is a very very long paragraph" * 10
+      result = Glamour.render(long_text, style: "notty")
+      lines = result.strip.lines.map(&:rstrip).reject(&:empty?)
+      assert_operator lines.length, :>, 1
+    end
+
+    it "renders without word wrap with width: 0" do
+      long_text = "This is a very very long paragraph" * 10
+      result = Glamour.render(long_text, style: "notty", width: 0)
+      lines = result.strip.lines.map(&:rstrip).reject(&:empty?)
+      assert_equal 1, lines.length
+    end
+
     it "renders with style and width" do
       result = Glamour.render("# Hello World", style: "dark", width: 80)
       refute_nil result
@@ -134,6 +148,22 @@ module Glamour
       assert_kind_of String, result
     end
 
+    it "enables word wrap by default with json style" do
+      json_style = '{"document": {"margin": 0}}'
+      long_text = "This is a very very long paragraph" * 10
+      result = Glamour.render_with_json(long_text, json_style)
+      lines = result.strip.lines.reject(&:empty?)
+      assert_operator lines.length, :>, 1
+    end
+
+    it "disables word wrap with width: 0 and json style" do
+      json_style = '{"document": {"margin": 0}}'
+      long_text = "This is a very very long paragraph" * 10
+      result = Glamour.render_with_json(long_text, json_style, width: 0)
+      lines = result.strip.lines.map(&:rstrip).reject(&:empty?)
+      assert_equal 1, lines.length
+    end
+
     it "renders with json style and width" do
       json_style = '{"document": {"margin": 2}}'
       result = Glamour.render_with_json("# Hello World", json_style, width: 40)
@@ -150,6 +180,20 @@ module Glamour
       refute_nil result
       assert_kind_of String, result
       assert_includes result, "Hello"
+    end
+
+    it "wraps by default when rendering with style hash" do
+      long_text = "This is a very long paragraph " * 10
+      result = Glamour.render_with_style(long_text, { document: { margin: 0 } })
+      lines = result.strip.lines.map(&:rstrip).reject(&:empty?)
+      assert_operator lines.length, :>, 1
+    end
+
+    it "disables word wrap when rendering with style hash and width: 0" do
+      long_text = "This is a very long paragraph " * 10
+      result = Glamour.render_with_style(long_text, { document: { margin: 0 } }, width: 0)
+      lines = result.strip.lines.map(&:rstrip).reject(&:empty?)
+      assert_equal 1, lines.length
     end
 
     it "renders with style json string" do

@@ -21,7 +21,7 @@ module Glamour
     # @rbs json_style: String? -- JSON style definition
     # @rbs style_hash: Hash[Symbol, untyped]? -- style definition hash
     # @rbs return: void
-    def initialize(style: "auto", width: 0, emoji: false, preserve_newlines: false, base_url: nil,
+    def initialize(style: "auto", width: nil, emoji: false, preserve_newlines: false, base_url: nil,
                    color_profile: :auto, json_style: nil, style_hash: nil)
       actual_style = style
       actual_json_style = json_style

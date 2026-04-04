@@ -24,7 +24,7 @@ module Glamour
     # @rbs style: String | singleton(Glamour::Style) -- style name or Style subclass
     # @rbs width: Integer -- optional word wrap width
     # @rbs return: String -- rendered output with ANSI escape codes
-    def render(markdown, style: "auto", width: 0, **options)
+    def render(markdown, style: "auto", width: nil, **options)
       if style_class?(style)
         render_with_style_class(markdown, style, width: width, **options)
       else
@@ -36,7 +36,7 @@ module Glamour
     # @rbs style: Hash[Symbol, untyped] | String | singleton(Glamour::Style) -- style definition
     # @rbs width: Integer -- optional word wrap width
     # @rbs return: String -- rendered output with ANSI escape codes
-    def render_with_style(markdown, style, width: 0)
+    def render_with_style(markdown, style, width: nil)
       json_style = style_to_json(style)
 
       render_with_json(markdown, json_style, width: width)
@@ -71,7 +71,7 @@ module Glamour
     # @rbs style_class: singleton(Glamour::Style) -- the Style subclass
     # @rbs width: Integer -- optional word wrap width
     # @rbs return: String -- rendered output with ANSI escape codes
-    def render_with_style_class(markdown, style_class, width: 0, **_options)
+    def render_with_style_class(markdown, style_class, width: nil, **_options)
       styles = style_class.to_h
 
       if styles.empty?

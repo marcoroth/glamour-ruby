@@ -64,7 +64,7 @@ func glamour_render_with_options(
 		options = append(options, glamour.WithAutoStyle())
 	}
 
-	if width > 0 {
+	if width >= 0 {
 		options = append(options, glamour.WithWordWrap(int(width)))
 	}
 
@@ -118,7 +118,7 @@ func glamour_render_with_json_style(markdown *C.char, jsonStyle *C.char, width C
 	jsonBytes := []byte(C.GoString(jsonStyle))
 	options = append(options, glamour.WithStylesFromJSONBytes(jsonBytes))
 
-	if width > 0 {
+	if width >= 0 {
 		options = append(options, glamour.WithWordWrap(int(width)))
 	}
 

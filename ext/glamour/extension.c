@@ -33,7 +33,7 @@ static VALUE glamour_render_rb(int argc, VALUE *argv, VALUE self) {
   const char *style = "auto";
   const char *base_url = NULL;
 
-  int width = 0;
+  int width = -1;
   int emoji = 0;
   int preserve_newlines = 0;
   int color_profile = COLOR_PROFILE_AUTO;
@@ -90,7 +90,7 @@ static VALUE glamour_render_rb(int argc, VALUE *argv, VALUE self) {
 
   char *result;
 
-  if (has_advanced_options || width > 0) {
+  if (has_advanced_options || width >= 0) {
     result = glamour_render_with_options(
       (char *) StringValueCStr(markdown),
       (char *) style,
@@ -128,7 +128,7 @@ static VALUE glamour_render_with_json_rb(int argc, VALUE *argv, VALUE self) {
   Check_Type(markdown, T_STRING);
   Check_Type(json_style, T_STRING);
 
-  int width = 0;
+  int width = -1;
 
   if (!NIL_P(options)) {
     VALUE width_value = rb_hash_lookup(options, ID2SYM(rb_intern("width")));
@@ -197,7 +197,7 @@ static VALUE renderer_initialize(int argc, VALUE *argv, VALUE self) {
   rb_scan_args(argc, argv, "0:", &options);
 
   rb_iv_set(self, "@style", rb_str_new_cstr("auto"));
-  rb_iv_set(self, "@width", INT2FIX(0));
+  rb_iv_set(self, "@width", Qnil);
   rb_iv_set(self, "@emoji", Qfalse);
   rb_iv_set(self, "@preserve_newlines", Qfalse);
   rb_iv_set(self, "@base_url", Qnil);
@@ -236,7 +236,8 @@ static VALUE renderer_render(VALUE self, VALUE markdown) {
   VALUE json_style = rb_iv_get(self, "@json_style");
 
   if (!NIL_P(json_style)) {
-    int width = NUM2INT(rb_iv_get(self, "@width"));
+    VALUE width_iv = rb_iv_get(self, "@width");
+    int width = NIL_P(width_iv) ? -1 : NUM2INT(width_iv);
 
     char *result = glamour_render_with_json_style(
       (char *)StringValueCStr(markdown),
@@ -251,7 +252,8 @@ static VALUE renderer_render(VALUE self, VALUE markdown) {
 
   VALUE style_value = rb_iv_get(self, "@style");
   const char *style = NIL_P(style_value) ? "auto" : StringValueCStr(style_value);
-  int width = NUM2INT(rb_iv_get(self, "@width"));
+  VALUE width_iv = rb_iv_get(self, "@width");
+  int width = NIL_P(width_iv) ? -1 : NUM2INT(width_iv);
   int emoji = RTEST(rb_iv_get(self, "@emoji")) ? 1 : 0;
   int preserve_newlines = RTEST(rb_iv_get(self, "@preserve_newlines")) ? 1 : 0;
 
